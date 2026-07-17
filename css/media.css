@@ -1,3 +1,8 @@
+@media (max-width:325px){
+    .stat-icon {
+        flex-shrink: 1;
+    }
+}
 @media (max-width: 576px) {
 
     .navbar-brand {
@@ -37,8 +42,31 @@
     }
 
     .navbar .d-flex.ms-auto {
-        /* gap: 8px !important; */
         flex-shrink: 0;
     }
+    .section-title {
+        font-size: 1.5rem;
+    }
+    .stat-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 10px;
+        /* flex-shrink: 1; */
+    }
+    .stat-label {
+        font-size: 12px;
+    }
+    .stat-value {
+        font-size: 20px;
+    }
+    .modal-box-body {
+        padding: 18px;
+    }
 
+}
+
+@media (max-width: 767.98px) {
+    .empty-state {
+        padding: 60px 16px;
+    }
 }

@@ -56,9 +56,291 @@
          </div>
    </nav>
 
+   <!--main content-->
+   <main class="container-fluid px-4 max-width-container py-4 py-sm-5" id="main-content">
+   
+      <!--quick stats-->
+      <section id="quick-stats" class="mb-5 mb-sm-5">
+         <div class="row row-cols-2 row-cols-md-3 g-4 g-sm-4">
+            <div class="col">
+               <div class="stat-card">
+                  <div class="d-flex align-items-center gap-3">
+                     <div class="stat-icon stat-icon-blue">
+                        <i class="fa-solid fa-users"></i>
+                     </div>
+                     <div>
+                        <p class="stat-label">Total</p>
+                        <p class="stat-value" id="totalCount">0</p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="col">
+               <div class="stat-card">
+                  <div class="d-flex align-items-center gap-3">
+                     <div class="stat-icon stat-icon-amber">
+                        <i class="fa-solid fa-star"></i>
+                     </div>
+                     <div>
+                        <p class="stat-label">Favorites</p>
+                        <p class="stat-value" id="favoriteCount">0</p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="col">
+               <div class="stat-card">
+                  <div class="d-flex align-items-center gap-3">
+                     <div class="stat-icon stat-icon-rose">
+                        <i class="fa-solid fa-heart-pulse"></i>
+                     </div>
+                     <div>
+                        <p class="stat-label">Emergency</p>
+                        <p class="stat-value" id="emergencyCount">0</p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+   
+      
+      <div class="row g-4 g-xl-4">
+   
+         <!--main content area-->
+         <div class="col-12 col-xl-8">
+   
+            <!--header & search-->
+            <section id="contacts-header" class="mb-5">
+               <div class="d-flex flex-column flex-sm-row align-items-sm-center justify-content-sm-between gap-3 mb-2">
+                  <div>
+                     <h2 class="section-title">All Contacts</h2>
+                     <p class="section-subtitle fw-medium">Manage and organize your <span id="contactsCountText">0</span> contacts
+                     </p>
+                  </div>
+               </div>
+   
+               <!--search bar-->
+               <div class="position-relative">
+                  <span class="search-icon">
+                     <i class="fa-solid fa-magnifying-glass"></i>
+                  </span>
+                  <input id="searchInput" type="text" placeholder="Search by name, phone, or email..."
+                     class="form-control search-input">
+               </div>
+            </section>
+   
+            <!--contacts grid-->
+            <section id="contacts-grid">
+               <div class="row row-cols-1 g-3 g-sm-4" id="contactsGrid">
+                  <div class="col-12 empty-state" id="emptyState">
+                     <div class="empty-icon">
+                        <i class="fa-solid fa-address-book"></i>
+                     </div>
+                     <p class="empty-title">No contacts found</p>
+                     <p class="empty-subtitle">Click "Add Contact" to get started</p>
+                  </div>
+               </div>
+            </section>
+   
+         </div>
+   
+         <!--right sidebar - desktop-->
+         <aside class="col-xl-4 d-none d-xl-block">
+            <div class="sidebar-sticky">
+   
+               <!--favorites section-->
+               <section id="favorites-section" class="side-card mb-4">
+                  <div class="side-card-header side-card-header-amber">
+                     <div class="d-flex align-items-center gap-3">
+                        <div class="side-icon side-icon-amber">
+                           <i class="fa-solid fa-star"></i>
+                        </div>
+                        <div>
+                           <h2 class="side-title">Favorites</h2>
+                           <p class="side-subtitle">Quick access to starred contacts</p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="side-card-body" id="favoritesList">
+                     <div class="side-empty">No favorites yet</div>
+                  </div>
+               </section>
+   
+               <!--emergency contacts section-->
+               <section id="emergency-contacts" class="side-card">
+                  <div class="side-card-header side-card-header-rose">
+                     <div class="d-flex align-items-center gap-3">
+                        <div class="side-icon side-icon-rose">
+                           <i class="fa-solid fa-heart-pulse"></i>
+                        </div>
+                        <div>
+                           <h2 class="side-title">Emergency</h2>
+                           <p class="side-subtitle">Important contacts for urgent calls</p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="side-card-body" id="emergencyList">
+                     <div class="side-empty">No emergency contacts</div>
+                  </div>
+               </section>
+   
+            </div>
+         </aside>
+      </div>
+   
+      <!--mobile favorites & emergency sections-->
+      <div class="d-xl-none mt-4 mt-sm-5">
+   
+         <section id="favorites-section-mobile" class="side-card mb-4">
+            <div class="side-card-header side-card-header-amber">
+               <div class="d-flex align-items-center gap-3">
+                  <div class="side-icon side-icon-amber side-icon-sm">
+                     <i class="fa-solid fa-star"></i>
+                  </div>
+                  <div>
+                     <h2 class="side-title side-title-sm">Favorites</h2>
+                     <p class="side-subtitle">Quick access</p>
+                  </div>
+               </div>
+            </div>
+            <div class="side-card-body side-card-body-grid" id="favoritesListMobile">
+               <div class="side-empty">No favorites yet</div>
+            </div>
+         </section>
+   
+         <section id="emergency-contacts-mobile" class="side-card">
+            <div class="side-card-header side-card-header-rose">
+               <div class="d-flex align-items-center gap-3">
+                  <div class="side-icon side-icon-rose side-icon-sm">
+                     <i class="fa-solid fa-heart-pulse"></i>
+                  </div>
+                  <div>
+                     <h2 class="side-title side-title-sm">Emergency</h2>
+                     <p class="side-subtitle">Urgent contacts</p>
+                  </div>
+               </div>
+            </div>
+            <div class="side-card-body side-card-body-grid" id="emergencyListMobile">
+               <div class="side-empty">No emergency contacts</div>
+            </div>
+         </section>
+   
+      </div>
+   
+   </main>
+   
+   <!--contact modal-->
+   <div class="modal-overlay" id="contactModal">
+      <div class="modal-backdrop-custom" id="modalBackdrop"></div>
+      <div class="modal-center">
+         <div class="modal-box">
+   
+            <div class="modal-box-header">
+               <h2 class="modal-box-title" id="modalTitle">Add New Contact</h2>
+               <button type="button" class="btn-close-custom" id="closeModalBtn">
+                  <i class="fa-solid fa-xmark"></i>
+               </button>
+            </div>
+   
+            <form id="contactForm" class="modal-box-body" novalidate>
+   
+               <!--avatar upload-->
+               <div class="d-flex flex-column align-items-center gap-3 pb-2">
+                  <div id="avatarPreview" class="avatar-preview">
+                     <i class="fa-solid fa-user"></i>
+                  </div>
+                  <label class="btn-change-photo">
+                     <i class="fa-solid fa-camera"></i>
+                     <span>Change Photo</span>
+                     <input type="file" id="avatarInput" accept="image/*" class="d-none">
+                  </label>
+                  <input type="hidden" id="avatarPath" value="">
+               </div>
+   
+               <!--name-->
+               <div class="mb-3">
+                  <label class="form-label-custom">Full Name <span class="text-danger">*</span></label>
+                  <input type="text" id="contactName" placeholder="Enter full name"
+                     class="form-control form-control-custom">
+                  <p class="form-error" id="contactNameError">Name should contain only letters and spaces (2-50 characters)
+                  </p>
+               </div>
+   
+               <!--phone-->
+               <div class="mb-3">
+                  <label class="form-label-custom">Phone Number <span class="text-danger">*</span></label>
+                  <input type="text" id="contactPhone" placeholder="e.g., 01012345678"
+                     class="form-control form-control-custom">
+                  <p class="form-error" id="contactPhoneError">Please enter a valid Egyptian phone number</p>
+               </div>
+   
+               <!--email-->
+               <div class="mb-3">
+                  <label class="form-label-custom">Email Address</label>
+                  <input type="text" id="contactEmail" placeholder="name@example.com"
+                     class="form-control form-control-custom">
+                  <p class="form-error" id="contactEmailError">Please enter a valid email address</p>
+               </div>
+   
+               <!--address-->
+               <div class="mb-3">
+                  <label class="form-label-custom">Address</label>
+                  <input type="text" id="contactAddress" placeholder="Enter address"
+                     class="form-control form-control-custom">
+               </div>
+   
+               <!--group-->
+               <div class="mb-3">
+                  <label class="form-label-custom">Group</label>
+                  <select id="contactGroup" class="form-select form-control-custom">
+                     <option value="">Select a group</option>
+                     <option value="family">Family</option>
+                     <option value="friends">Friends</option>
+                     <option value="work">Work</option>
+                     <option value="school">School</option>
+                     <option value="other">Other</option>
+                  </select>
+               </div>
+   
+               <!--notes-->
+               <div class="mb-3">
+                  <label class="form-label-custom">Notes</label>
+                  <textarea id="contactNotes" rows="2" placeholder="Add notes about this contact"
+                     class="form-control form-control-custom"></textarea>
+               </div>
+   
+               <!--checkboxes-->
+               <div class="d-flex flex-wrap gap-4 py-2 mb-2">
+                  <label class="check-label">
+                     <input type="checkbox" id="contactFavorite" class="check-input check-input-amber">
+                     <span><i class="fa-solid fa-star check-icon-amber"></i>Favorite</span>
+                  </label>
+                  <label class="check-label">
+                     <input type="checkbox" id="contactEmergency" class="check-input check-input-rose">
+                     <span><i class="fa-solid fa-heart-pulse check-icon-rose"></i>Emergency</span>
+                  </label>
+               </div>
+   
+               <input type="hidden" id="contactId" value="">
+   
+               <!--form actions-->
+               <div class="d-flex flex-column-reverse flex-sm-row gap-3 pt-2">
+                  <button type="button" id="cancelModalBtn" class="btn btn-cancel-custom flex-fill">Cancel</button>
+                  <button type="submit" class="btn btn-save-custom flex-fill">
+                     <i class="fa-solid fa-check me-2"></i>Save Contact
+                  </button>
+               </div>
+   
+            </form>
+         </div>
+      </div>
+   </div>
 
 
-   <!-- bootstrap js -->
-   <script src="js/bootstrap.bundle.min.js"></script>
+   <!--bootstrap js bundle-->
+   <script src="Js/bootstrap.bundle.min.js"></script>
+   <!--js-->
+   <script src="Js/index.js"></script>
 </body>
 </html>
