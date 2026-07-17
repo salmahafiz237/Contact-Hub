@@ -9,38 +9,32 @@
         gap: 2px;
         margin-right: 0;
     }
-
     .navbar-brand h4 {
         font-size: 1rem;
         white-space: nowrap;
     }
-
     .logo-square {
         width: 40px;
         height: 40px;
         flex-shrink: 0;
     }
-
     .navbar-custom .btn-add-contact {
         padding: 8px 12px;
         font-size: 12px;
         white-space: nowrap;
         font-weight: 500;
     }
-
     .profile-img {
         width: 40px;
         height: 40px;
         flex-shrink: 0;
     }
-
     .navbar .container-fluid {
         display: flex;
         align-items: center;
         justify-content: space-between;
         flex-wrap: nowrap;
     }
-
     .navbar .d-flex.ms-auto {
         flex-shrink: 0;
     }
@@ -61,6 +55,10 @@
     }
     .modal-box-body {
         padding: 18px;
+    }
+    .side-card-body-grid{
+        display: flex;
+        flex-wrap: wrap;
     }
 
 }

@@ -17,6 +17,14 @@
    <link rel="stylesheet" href="css/media.css">
 </head>
 <body>
+   
+   <!--background blobs-->
+   <div class="bg-blobs">
+      <div class="blob blob-blue"></div>
+      <div class="blob blob-violet"></div>
+      <div class="blob blob-emerald"></div>
+   </div>
+
    <!--navbar-->
    <nav class="navbar navbar-expand-sm sticky-top navbar-custom z-3 py-3">
       <div class="container-fluid px-3 max-width-container">
@@ -32,7 +40,7 @@
          </a>
    
          <div class="d-flex align-items-center gap-2 gap-sm-3 ms-auto">
-            <button id="addContactBtn"
+            <button id="addContactBtn" onclick="openAddModal()"
                class="btn btn-add-contact d-inline-flex align-items-center gap-2 px-sm-3 py-sm-2.5">
                <i class="fa-solid fa-plus text-xs"></i>
                <span class="d-none d-sm-inline">Add Contact</span>
@@ -125,7 +133,7 @@
                   <span class="search-icon">
                      <i class="fa-solid fa-magnifying-glass"></i>
                   </span>
-                  <input id="searchInput" type="text" placeholder="Search by name, phone, or email..."
+                  <input id="searchInput" type="text" oninput="displayAllContacts(this)" placeholder="Search by name, phone, or email..."
                      class="form-control search-input">
                </div>
             </section>
@@ -232,13 +240,13 @@
    
    <!--contact modal-->
    <div class="modal-overlay" id="contactModal">
-      <div class="modal-backdrop-custom" id="modalBackdrop"></div>
+      <div class="modal-backdrop-custom" onclick="hideModal()" id="modalBackdrop"></div>
       <div class="modal-center">
          <div class="modal-box">
    
             <div class="modal-box-header">
                <h2 class="modal-box-title" id="modalTitle">Add New Contact</h2>
-               <button type="button" class="btn-close-custom" id="closeModalBtn">
+               <button type="button" onclick="hideModal()" class="btn-close-custom" id="closeModalBtn">
                   <i class="fa-solid fa-xmark"></i>
                </button>
             </div>
@@ -253,7 +261,7 @@
                   <label class="btn-change-photo">
                      <i class="fa-solid fa-camera"></i>
                      <span>Change Photo</span>
-                     <input type="file" id="avatarInput" accept="image/*" class="d-none">
+                     <input type="file" id="avatarInput" accept="image/*" onchange="handleAvatarUpload(event)" class="d-none">
                   </label>
                   <input type="hidden" id="avatarPath" value="">
                </div>
@@ -261,8 +269,7 @@
                <!--name-->
                <div class="mb-3">
                   <label class="form-label-custom">Full Name <span class="text-danger">*</span></label>
-                  <input type="text" id="contactName" placeholder="Enter full name"
-                     class="form-control form-control-custom">
+                  <input type="text" id="contactName" oninput="validateAllInput(this)" placeholder="Enter full name" class="form-control form-control-custom">
                   <p class="form-error" id="contactNameError">Name should contain only letters and spaces (2-50 characters)
                   </p>
                </div>
@@ -270,16 +277,14 @@
                <!--phone-->
                <div class="mb-3">
                   <label class="form-label-custom">Phone Number <span class="text-danger">*</span></label>
-                  <input type="text" id="contactPhone" placeholder="e.g., 01012345678"
-                     class="form-control form-control-custom">
+                  <input type="text" id="contactPhone" oninput="validateAllInput(this)" placeholder="e.g., 01012345678" class="form-control form-control-custom">
                   <p class="form-error" id="contactPhoneError">Please enter a valid Egyptian phone number</p>
                </div>
    
                <!--email-->
                <div class="mb-3">
                   <label class="form-label-custom">Email Address</label>
-                  <input type="text" id="contactEmail" placeholder="name@example.com"
-                     class="form-control form-control-custom">
+                  <input type="text" id="contactEmail" oninput="validateAllInput(this)" placeholder="name@example.com" class="form-control form-control-custom">
                   <p class="form-error" id="contactEmailError">Please enter a valid email address</p>
                </div>
    
@@ -323,20 +328,41 @@
                </div>
    
                <input type="hidden" id="contactId" value="">
-   
                <!--form actions-->
                <div class="d-flex flex-column-reverse flex-sm-row gap-3 pt-2">
-                  <button type="button" id="cancelModalBtn" class="btn btn-cancel-custom flex-fill">Cancel</button>
-                  <button type="submit" class="btn btn-save-custom flex-fill">
+                  <button type="button" id="cancelModalBtn" onclick="hideModal()"
+                     class="btn btn-cancel-custom flex-fill">Cancel</button>
+                  <button type="button" id="addBtn" onclick="addNewContact()" class="btn btn-save-custom flex-fill">
                      <i class="fa-solid fa-check me-2"></i>Save Contact
                   </button>
+                  <button type="button" id="updateBtn" onclick="updateThisItem()" class="btn btn-save-custom flex-fill d-none">
+                     <i class="fa-solid fa-check me-2"></i>Update Contact
+                  </button>
                </div>
-   
-            </form>
-         </div>
-      </div>
-   </div>
-
+               
+               </div>
+               </div>
+               </div>
+               </div>
+               
+               <!--delete confirmation modal-->
+               <div class="modal-overlay" id="deleteModal">
+                  <div class="modal-backdrop-custom" id="deleteModalBackdrop" onclick="hideDeleteModal()"></div>
+                  <div class="modal-center">
+                     <div class="delete-modal-box">
+                        <div class="delete-modal-icon">
+                           <i class="fa-solid fa-exclamation"></i>
+                        </div>
+                        <h2 class="delete-modal-title">Delete Contact?</h2>
+                        <p class="delete-modal-text">Are you sure you want to delete <span id="deleteContactName"></span>? This action
+                           cannot be undone.</p>
+                        <div class="delete-modal-actions">
+                           <button type="button" class="btn btn-delete-confirm" onclick="confirmDelete()">Yes, delete it!</button>
+                           <button type="button" class="btn btn-delete-cancel" onclick="hideDeleteModal()">Cancel</button>
+                        </div>
+                     </div>
+                  </div>
+               </div>
 
    <!--bootstrap js bundle-->
    <script src="Js/bootstrap.bundle.min.js"></script>

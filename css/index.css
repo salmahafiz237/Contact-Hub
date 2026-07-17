@@ -10,6 +10,7 @@ body {
     scroll-behavior: smooth;
     font-family: 'Inter', sans-serif;
     background-color: #f9fafb;
+    position: relative;
 }
 * {
     margin: 0;
@@ -86,7 +87,7 @@ nav.navbar.navbar-custom {
     font-size: 20px;
     box-shadow: 0 4px 8px #DCCAFF;
     flex-shrink: 0;
-    border-radius:12px;
+    border-radius: 12px;
 }
 .navbar-brand h4 {
     font-size: 1.25rem;
@@ -98,7 +99,7 @@ nav.navbar.navbar-custom {
 .profile-img {
     width: 40px;
     height: 40px;
-    border-radius:12px;
+    border-radius: 12px;
     object-fit: cover;
     cursor: pointer;
 }
@@ -133,6 +134,7 @@ nav.navbar.navbar-custom {
     color: #364153;
     background-color: #f3f4f6;
 }
+
 /* //////////////////Navbar////////// */
 
 /* //////////////////Layout helpers////////// */
@@ -148,10 +150,9 @@ nav.navbar.navbar-custom {
 .stat-card {
     background-color: #ffffff;
     border: 1px solid #f3f4f6;
-    border:1.3px solid #F3F4F6;
     border-radius: 16px;
     padding: 18px;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
     transition: box-shadow 0.2s ease;
     height: 100%;
 }
@@ -171,26 +172,26 @@ nav.navbar.navbar-custom {
 }
 .stat-icon-blue {
     background: linear-gradient(to bottom right, #3b82f6, #2563eb);
-    box-shadow: 0 6px 6px rgba(59, 130, 246, 0.25);
+    box-shadow: 0 8px 12px rgba(59, 130, 246, 0.25);
 }
 .stat-icon-amber {
     background: linear-gradient(to bottom right, #fbbf24, #f97316);
-    box-shadow: 0 6px 6px rgba(245, 158, 11, 0.25);
+    box-shadow: 0 8px 12px rgba(245, 158, 11, 0.25);
 }
 .stat-icon-rose {
     background: linear-gradient(to bottom right, #f43f5e, #dc2626);
-    box-shadow: 0 6px 6px rgba(244, 63, 94, 0.25);
+    box-shadow: 0 8px 12px rgba(244, 63, 94, 0.25);
 }
 .stat-label {
-    font-size: 12px;
-    font-weight: 600;
+    font-size: 11px;
+    font-weight: 500;
     text-transform: uppercase;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.04em;
     color: #6b7280;
     margin-bottom: 2px;
 }
 .stat-value {
-    font-size: 24px;
+    font-size: 22px;
     font-weight: 700;
     color: #111827;
     margin-bottom: 0;
@@ -205,8 +206,8 @@ nav.navbar.navbar-custom {
 }
 .section-subtitle {
     font-size: 14px;
-    color: #6A7282;
-    /* margin-top: 2px; */
+    color: #6b7280;
+    margin-top: 2px;
 }
 .search-icon {
     position: absolute;
@@ -228,7 +229,7 @@ nav.navbar.navbar-custom {
 }
 .search-input:focus {
     box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15);
-    border-color:#7c3aed;
+    border-color: #7c3aed;
 }
 /* //////////////////Contacts Header////////// */
 
@@ -267,6 +268,8 @@ nav.navbar.navbar-custom {
     transition: box-shadow 0.2s ease;
     height: 100%;
     position: relative;
+    display: flex;
+    flex-direction: column;
 }
 .contact-card:hover {
     box-shadow: 0 6px 14px rgba(0, 0, 0, 0.07);
@@ -274,12 +277,16 @@ nav.navbar.navbar-custom {
 .contact-card-top {
     display: flex;
     align-items: flex-start;
-    gap: 12px;
+    gap: 14px;
+}
+.contact-avatar-wrap {
+    position: relative;
+    flex-shrink: 0;
 }
 .contact-avatar {
-    width: 52px;
-    height: 52px;
-    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    border-radius: 16px;
     background: linear-gradient(to bottom right, #60a5fa, #2563eb);
     color: #ffffff;
     font-weight: 700;
@@ -287,52 +294,134 @@ nav.navbar.navbar-custom {
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-shrink: 0;
     object-fit: cover;
 }
-.contact-name {
-    font-size: 15px;
-    font-weight: 600;
-    color: #111827;
-    margin-bottom: 2px;
-}
-.contact-detail {
-    font-size: 13px;
-    color: #6b7280;
-    margin-bottom: 2px;
+.avatar-badge {
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
     display: flex;
     align-items: center;
-    gap: 6px;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 10px;
+    border: 2px solid #ffffff;
+}
+.avatar-badge-fav {
+    top: -6px;
+    right: -6px;
+    background: linear-gradient(to bottom right, #fbbf24, #f97316);
+}
+.avatar-badge-emergency {
+    bottom: -6px;
+    right: -6px;
+    background: linear-gradient(to bottom right, #f43f5e, #dc2626);
+}
+.contact-name {
+    font-size: 16px;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 6px;
+}
+.contact-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: #374151;
+    margin-bottom: 6px;
+}
+.row-icon {
+    width: 24px;
+    height: 24px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    flex-shrink: 0;
+}
+.row-icon-blue {
+    background-color: #dbeafe;
+    color: #2563eb;
+}
+.row-icon-purple {
+    background-color: #ede9fe;
+    color: #7c3aed;
+}
+.row-icon-teal {
+    background-color: #d1fae5;
+    color: #059669;
 }
 .contact-badges {
     display: flex;
     gap: 6px;
-    margin-top: 8px;
+    margin-top: 6px;
     flex-wrap: wrap;
 }
 .badge-group {
     font-size: 11px;
     font-weight: 600;
-    padding: 3px 10px;
+    padding: 4px 10px;
     border-radius: 999px;
-    background-color: #ede9fe;
-    color: #6d28d9;
+    background-color: #dcfce7;
+    color: #15803d;
     text-transform: capitalize;
 }
-.badge-fav {
-    color: #f59e0b;
-}
 .badge-emergency {
-    color: #e11d48;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background-color: #ffe4e6;
+    color: #be123c;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
 }
-.contact-actions {
+.contact-card-actions {
     display: flex;
-    gap: 6px;
-    flex-shrink: 0;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid #f3f4f6;
 }
-.contact-action-btn {
-    width: 32px;
-    height: 32px;
+.actions-left,
+.actions-right {
+    display: flex;
+    gap: 8px;
+}
+.action-circle {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+.action-circle-green {
+    background-color: #dcfce7;
+    color: #16a34a;
+}
+.action-circle-green:hover {
+    background-color: #bbf7d0;
+}
+.action-circle-purple {
+    background-color: #ede9fe;
+    color: #7c3aed;
+}
+.action-circle-purple:hover {
+    background-color: #ddd6fe;
+}
+.action-square {
+    width: 34px;
+    height: 34px;
     border-radius: 10px;
     border: none;
     background-color: #f9fafb;
@@ -344,17 +433,19 @@ nav.navbar.navbar-custom {
     transition: all 0.15s ease;
     cursor: pointer;
 }
-.contact-action-btn:hover {
+.action-square:hover {
     background-color: #f3f4f6;
     color: #374151;
 }
-.contact-action-btn.active-fav {
+.action-square.active-fav {
+    background-color: #fef3c7;
     color: #f59e0b;
 }
-.contact-action-btn.active-emergency {
+.action-square.active-emergency {
+    background-color: #ffe4e6;
     color: #e11d48;
 }
-.contact-action-btn.delete-btn:hover {
+.action-square.delete-btn:hover {
     color: #dc2626;
     background-color: #fef2f2;
 }
@@ -460,9 +551,9 @@ nav.navbar.navbar-custom {
     background-color: #f3f4f6;
 }
 .side-item-avatar {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
     background: linear-gradient(to bottom right, #60a5fa, #2563eb);
     color: #ffffff;
     font-weight: 700;
@@ -487,6 +578,25 @@ nav.navbar.navbar-custom {
     color: #6b7280;
     margin-bottom: 0;
 }
+.side-item-call {
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    border: none;
+    background-color: #dcfce7;
+    color: #16a34a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    flex-shrink: 0;
+    margin-left: auto;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+.side-item-call:hover {
+    background-color: #bbf7d0;
+}
 /* //////////////////Sidebar (favorites/emergency)////////// */
 
 /* //////////////////Modal////////// */
@@ -496,11 +606,9 @@ nav.navbar.navbar-custom {
     z-index: 50;
     display: none;
 }
-
 .modal-overlay.show {
     display: block;
 }
-
 .modal-backdrop-custom {
     position: fixed;
     inset: 0;
@@ -508,7 +616,6 @@ nav.navbar.navbar-custom {
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
 }
-
 .modal-center {
     position: fixed;
     inset: 0;
@@ -517,7 +624,6 @@ nav.navbar.navbar-custom {
     justify-content: center;
     padding: 16px;
 }
-
 .modal-box {
     background-color: #ffffff;
     border-radius: 16px;
@@ -528,11 +634,9 @@ nav.navbar.navbar-custom {
     overflow-y: auto;
     position: relative;
 }
-
 .modal-box::-webkit-scrollbar {
     display: none;
 }
-
 .modal-box-header {
     position: sticky;
     top: 0;
@@ -544,14 +648,12 @@ nav.navbar.navbar-custom {
     justify-content: space-between;
     z-index: 10;
 }
-
 .modal-box-title {
     font-size: 20px;
     font-weight: 700;
     color: #111827;
     margin-bottom: 0;
 }
-
 .btn-close-custom {
     width: 36px;
     height: 36px;
@@ -565,16 +667,13 @@ nav.navbar.navbar-custom {
     font-size: 17px;
     transition: all 0.15s ease;
 }
-
 .btn-close-custom:hover {
     color: #4b5563;
     background-color: #f3f4f6;
 }
-
 .modal-box-body {
     padding: 24px;
 }
-
 .avatar-preview {
     width: 96px;
     height: 96px;
@@ -589,7 +688,6 @@ nav.navbar.navbar-custom {
     overflow: hidden;
     object-fit: cover;
 }
-
 .btn-change-photo {
     display: inline-flex;
     align-items: center;
@@ -603,11 +701,9 @@ nav.navbar.navbar-custom {
     cursor: pointer;
     transition: background-color 0.15s ease;
 }
-
 .btn-change-photo:hover {
     background-color: #e5e7eb;
 }
-
 .form-label-custom {
     display: block;
     font-size: 14px;
@@ -615,7 +711,6 @@ nav.navbar.navbar-custom {
     color: #374151;
     margin-bottom: 6px;
 }
-
 .form-control-custom {
     background-color: #f9fafb;
     border: 1px solid #e5e7eb;
@@ -623,33 +718,25 @@ nav.navbar.navbar-custom {
     font-size: 14px;
     padding: 12px 16px;
 }
-
 .form-control-custom:focus {
     background-color: #ffffff;
     border-color: #7c3aed;
     box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15);
 }
-
 textarea.form-control-custom {
     resize: none;
 }
-
-.form-error {
-    display: none;
-    color: #f43f5e;
+.modal-box-body .alert {
     font-size: 12px;
-    margin-top: 6px;
+    padding: 6px 12px;
     margin-bottom: 0;
 }
-
-.form-error.show {
-    display: block;
-}
-
 .form-control-custom.is-invalid {
     border-color: #f43f5e;
 }
-
+.form-control-custom.is-valid {
+    border-color: #10b981;
+}
 .check-label {
     display: inline-flex;
     align-items: center;
@@ -659,23 +746,19 @@ textarea.form-control-custom {
     font-weight: 500;
     color: #4b5563;
 }
-
 .check-input {
     width: 18px;
     height: 18px;
     cursor: pointer;
 }
-
 .check-icon-amber {
     color: #fbbf24;
     margin-right: 4px;
 }
-
 .check-icon-rose {
     color: #f43f5e;
     margin-right: 4px;
 }
-
 .btn-cancel-custom {
     background-color: #f3f4f6;
     color: #374151;
@@ -686,12 +769,10 @@ textarea.form-control-custom {
     padding: 12px 20px;
     transition: background-color 0.15s ease;
 }
-
 .btn-cancel-custom:hover {
     background-color: #e5e7eb;
     color: #374151;
 }
-
 .btn-save-custom {
     background: linear-gradient(to right, #7c3aed, #4f46e5);
     color: #ffffff;
@@ -702,8 +783,81 @@ textarea.form-control-custom {
     padding: 12px 20px;
     transition: all 0.2s ease;
 }
-
 .btn-save-custom:hover {
     box-shadow: 0 10px 15px -3px rgba(124, 58, 237, 0.25);
     color: #ffffff;
 }
+/* //////////////////Modal////////// */
+
+/* //////////////////Delete Confirmation Modal////////// */
+.delete-modal-box {
+    background-color: #ffffff;
+    /* border-radius: 20px; */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    max-width: 490px;
+    width: 100%;
+    padding: 38px 38px;
+    text-align: center;
+}
+.delete-modal-icon {
+    width: 72px;
+    height: 72px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    border: 2.5px solid #fdba74;
+    color: #f97316;
+    font-size: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.delete-modal-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #545454;
+    margin-bottom: 12px;
+}
+.delete-modal-text {
+    font-size: 17px;
+    font-weight: 400;
+    color: #545454;
+    margin-bottom: 24px;
+    line-height: 1.6;
+}
+.delete-modal-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+        text-align: center;
+}
+.btn-delete-confirm {
+    /* flex: 1; */
+    background-color: #DC2626;
+    color: #ffffff;
+    border: none;
+    /* border-radius: 12px; */
+    font-weight: 600;
+    font-size: 14px;
+    padding: 12px 12px;
+    transition: background-color 0.15s ease;
+}
+.btn-delete-confirm:hover {
+    background-color:#C62222;
+    color: #ffffff;
+}
+.btn-delete-cancel {
+    /* flex: 1; */
+    background-color: #64748b;
+    color: #ffffff;
+    border: none;
+    /* border-radius: 12px; */
+    font-weight: 600;
+    font-size: 14px;
+    padding: 12px 16px;
+    transition: background-color 0.15s ease;
+}
+.btn-delete-cancel:hover {
+    background-color: #475569;
+    color: #ffffff;
+}
+/* //////////////////Delete Confirmation Modal////////// */
