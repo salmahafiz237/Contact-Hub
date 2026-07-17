@@ -1,0 +1,100 @@
+/* //////////////////general////////// */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    scroll-behavior: smooth;
+    font-family: 'Inter', sans-serif;
+    background-color: #f9fafb;
+}
+* {
+    margin: 0;
+    scroll-behavior: smooth;
+}
+a {
+    text-decoration: none;
+    color: inherit;
+}
+li {
+    list-style: none;
+}
+@font-face {
+    font-family: Inter, sans-serif;
+    src: url(../fonts/Inter_28pt-Regular.ttf);
+}
+
+/* //////////////////general////////// */
+
+/* //////////////////Navbar////////// */
+nav.navbar.navbar-custom {
+    background-color: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-bottom: 1px solid rgba(229, 231, 235, 0.5);
+    box-shadow: none;
+}
+.logo-square {
+    width: 45px;
+    height: 45px;
+    background: linear-gradient(to right, #7c3aed, #4f46e5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 20px;
+    box-shadow: 0 4px 8px #DCCAFF;
+    flex-shrink: 0;
+    border-radius:12px;
+}
+.navbar-brand h4 {
+    font-size: 1.25rem;
+    color: #111827;
+}
+.navbar-brand small {
+    font-size: 0.75rem;
+}
+.profile-img {
+    width: 40px;
+    height: 40px;
+    border-radius:12px;
+    object-fit: cover;
+    cursor: pointer;
+}
+.navbar-custom .btn-add-contact {
+    background: linear-gradient(to right, #7c3aed, #4f46e5);
+    color: #ffffff;
+    border: none;
+    border-radius: 12px;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+    padding: 8px;
+    font-size: 14.5px;
+}
+.navbar-custom .btn-add-contact:hover {
+    box-shadow: 0 10px 15px -3px rgba(124, 58, 237, 0.3);
+    transform: translateY(-1px);
+    color: #ffffff;
+}
+.navbar-custom .btn-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6B7280;
+    border-radius: 12px;
+    border: none;
+    background-color: transparent;
+    transition: all 0.2s;
+}
+
+.navbar-custom .btn-icon:hover {
+    color: #364153;
+    background-color: #f3f4f6;
+}
+/* //////////////////Navbar////////// */
+
