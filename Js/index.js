@@ -48,11 +48,16 @@ var avatarColors = [
 // global variable
 displayAllContacts();
 
+
 // ================ Creation ================
 function addNewContact() {
     var isNameValid = validateAllInput(htmlElements.contactName);
     var isPhoneValid = validateAllInput(htmlElements.contactPhone);
     var isEmailValid = validateAllInput(htmlElements.contactEmail);
+
+    if (isPhoneValid) {
+        isPhoneValid = checkPhoneNotDuplicate(null);
+    }
 
     if (isNameValid && isPhoneValid && isEmailValid) {
         var newContact = {
@@ -90,8 +95,7 @@ function clearForm() {
     globalIndex = undefined;
 
     var fields = [htmlElements.contactName, htmlElements.contactPhone, htmlElements.contactEmail];
-    var i;
-    for (i = 0; i < fields.length; i++) {
+    for (var i = 0; i < fields.length; i++) {
         fields[i].classList.remove("is-valid", "is-invalid");
         fields[i].nextElementSibling.classList.add("d-none");
     }
@@ -104,8 +108,7 @@ function clearForm() {
 function getInitials(name) {
     var parts = name.trim().split(/\s+/);
     var initials = "";
-    var i;
-    for (i = 0; i < parts.length && i < 2; i++) {
+    for (var i = 0; i < parts.length && i < 2; i++) {
         initials += parts[i].charAt(0).toUpperCase();
     }
     return initials;
@@ -132,9 +135,8 @@ function handleAvatarUpload(event) {
 function displayAllContacts(element) {
     var text = element ? element.value : "";
     var box = '';
-    var i;
 
-    for (i = 0; i < contactList.length; i++) {
+    for (var i = 0; i < contactList.length; i++) {
         var contact = contactList[i];
         var matches = contact.name.toLowerCase().includes(text.toLowerCase()) ||
             contact.phone.toLowerCase().includes(text.toLowerCase()) ||
@@ -155,7 +157,7 @@ function displayAllContacts(element) {
             var emergencyPill = contact.emergency ? `<span class="badge-emergency"><i class="fa-solid fa-heart-pulse"></i>Emergency</span>` : '';
 
             box += `
-                <div class="col-md-6">
+                <div class="col col-md-6">
                     <div class="contact-card">
                         <div class="contact-card-top">
                             <div class="contact-avatar-wrap">
@@ -173,8 +175,8 @@ function displayAllContacts(element) {
                         </div>
                         <div class="contact-card-actions">
                             <div class="actions-left">
-                                <button type="button" class="action-circle action-circle-green" title="Call"><i class="fa-solid fa-phone"></i></button>
-                                <button type="button" class="action-circle action-circle-purple" title="Email"><i class="fa-solid fa-envelope"></i></button>
+                                <button type="button" class="action-circle action-circle-green" onclick="callContact('${contact.phone}')" title="Call"><i class="fa-solid fa-phone"></i></button>
+                                <button type="button" class="action-circle action-circle-purple" onclick="emailContact('${contact.email}')" title="Email"${contact.email ? '' : ' disabled'}><i class="fa-solid fa-envelope"></i></button>
                             </div>
                             <div class="actions-right">
                                 <button type="button" class="action-square${contact.favorite ? ' active-fav' : ''}" onclick="toggleFavorite(${i})" title="Toggle favorite"><i class="fa-solid fa-star"></i></button>
@@ -212,8 +214,8 @@ function displayAllContacts(element) {
 // ================ Sidebar lists ================
 function displaySideList(container, flagKey, emptyMessage) {
     var box = '';
-    var i;
-    for (i = 0; i < contactList.length; i++) {
+
+    for (var i = 0; i < contactList.length; i++) {
         var contact = contactList[i];
         if (contact[flagKey]) {
             var avatarHtml = contact.avatar
@@ -227,7 +229,7 @@ function displaySideList(container, flagKey, emptyMessage) {
                         <p class="side-item-name">${contact.name}</p>
                         <p class="side-item-phone">${contact.phone}</p>
                     </div>
-                    <button type="button" class="side-item-call" title="Call" onclick="event.stopPropagation()"><i class="fa-solid fa-phone"></i></button>
+                    <button type="button" class="side-item-call" title="Call" onclick="event.stopPropagation(); callContact('${contact.phone}')"><i class="fa-solid fa-phone"></i></button>
                 </div>
             `;
         }
@@ -235,13 +237,27 @@ function displaySideList(container, flagKey, emptyMessage) {
     container.innerHTML = box === '' ? `<div class="side-empty">${emptyMessage}</div>` : box;
 }
 
+// ================ Action buttons: call / email ================
+function callContact(phone) {
+    if (!phone) {
+        return;
+    }
+    window.location.href = "tel:" + phone;
+}
+
+function emailContact(email) {
+    if (!email) {
+        return;
+    }
+    window.location.href = "mailto:" + email;
+}
+
 // ================ Stats ================
 function updateStats() {
     var total = contactList.length;
     var favorites = 0;
     var emergency = 0;
-    var i;
-    for (i = 0; i < contactList.length; i++) {
+    for (var i = 0; i < contactList.length; i++) {
         if (contactList[i].favorite) {
             favorites++;
         }
@@ -324,6 +340,10 @@ function updateThisItem() {
     var isPhoneValid = validateAllInput(htmlElements.contactPhone);
     var isEmailValid = validateAllInput(htmlElements.contactEmail);
 
+    if (isPhoneValid) {
+        isPhoneValid = checkPhoneNotDuplicate(globalIndex);
+    }
+
     if (isNameValid && isPhoneValid && isEmailValid) {
         var updatedContact = {
             name: htmlElements.contactName.value.trim(),
@@ -372,6 +392,12 @@ document.addEventListener("keydown", function (e) {
 
 // ====================== validation =======================
 
+var defaultErrorMessages = {
+    contactNameError: "Name should contain only letters and spaces (2-50 characters)",
+    contactPhoneError: "Please enter a valid Egyptian phone number",
+    contactEmailError: "Please enter a valid email address"
+};
+
 function validateAllInput(element) {
     var regex = {
         contactName: /^[a-zA-Z\s]{2,50}$/,
@@ -379,6 +405,7 @@ function validateAllInput(element) {
         contactEmail: /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     };
     var alertMsgs = element.nextElementSibling;
+    alertMsgs.textContent = defaultErrorMessages[alertMsgs.id];
     var isOptionalEmpty = element.id === "contactEmail" && element.value.trim() === "";
 
     if (isOptionalEmpty || regex[element.id].test(element.value.trim())) {
@@ -392,4 +419,33 @@ function validateAllInput(element) {
         alertMsgs.classList.remove("d-none");
         return false;
     }
+}
+
+// ================ Duplicate phone check ================
+function isDuplicatePhone(phone, excludeIndex) {
+
+    for (var i = 0; i < contactList.length; i++) {
+        if (i === excludeIndex) {
+            continue;
+        }
+        if (contactList[i].phone === phone) {
+            return true;
+        }
+    }
+    return false;
+}
+
+function checkPhoneNotDuplicate(excludeIndex) {
+    var phoneInput = htmlElements.contactPhone;
+    var phoneAlert = phoneInput.nextElementSibling;
+    var phoneValue = phoneInput.value.trim();
+
+    if (isDuplicatePhone(phoneValue, excludeIndex)) {
+        phoneInput.classList.add("is-invalid");
+        phoneInput.classList.remove("is-valid");
+        phoneAlert.textContent = "This phone number is already used by another contact";
+        phoneAlert.classList.remove("d-none");
+        return false;
+    }
+    return true;
 }
